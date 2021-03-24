@@ -1,65 +1,38 @@
+import helper
+import pregame
+import random
 
-def yes_no_question(string):
-    answer =  input(string + " (Y or N) ")
-    answer.lower()
-    yes = ['y','yes','yeah']
-    no = ['n','no','nope']
-    while True:
-        if answer in yes:
-            return True
-        if answer in no:
-            return False
-        answer= input('Please select Y or N ')
+def roll():
+    num_of_dice = 4
+    sides_of_dice = 6
+    dice = []
+    for i in range(num_of_dice):
+        dice.append(random.randint(1,sides_of_dice))
+    return dice
 
-def end_section():
-    print('\n\n')
+def get_combos(dice):
+    combos = []
+    total = sum(dice)
+    first_die = dice[0]
+    for i in range(1,len(dice)):
+        option = first_die + dice[i]
+        combos.append([option, total - option])
+    print("This roll yeilds the following sums:", end=" ")
+    print(combos)
+    return combos
 
-def get_player_name():
-    return input("Player Name: ")
-def display_players_list(names_list):
-    print('The players are: ')
-    for i in range(len(names_list)):
-        name = names_list[i]
-        print(str(i) + '. ' + name)
-def add_new_player_bool():
-    return yes_no_question("Add new player?")
-def remove_player_bool():
-    return yes_no_question("Remove a player?")
-def remove_player(names_list):
-    display_players_list(names_list)
-    num = int(input("Select the number of the player to remove: "))
-    if num < len(names_list):
-        names_list.pop(0)
-    return names_list
+def select_combos(combos):
+    pass
 
-def add_players_loop(names_list):
-    add_name_bool = True
-    while add_name_bool:
-        names_list.append(get_player_name())
-        add_name_bool = add_new_player_bool()
-    return names_list
+def run_turn():
+    dice = roll()
+    combos = get_combos(dice)
+    combo_selection = select_combo(combos)
 
-def remove_players_loop(names_list):
-    remove_name_bool = True
-    while remove_name_bool:
-        names_list=remove_player(names_list)
-        remove_name_bool = remove_player_bool()
-    return names_list
-def get_players_names():
-    names_list = []
-    names_list = add_players_loop(names_list)
-    
-    display_players_list(names_list)
-    all_correct_bool = yes_no_question('Is this correct?')
-    while not all_correct_bool:
-        if add_new_player_bool():
-            names_list = add_players_loop(names_list)
-        if remove_player_bool():
-            remove_player(names_list)
-        display_players_list(names_list)
-        all_correct_bool = yes_no_question('Is this correct?')
-        
-        
 def main ():
-    players_names_list = get_players_names()
+    players_names_list = ['Mary','Sarah','Eli','Samuel']
+    board_dict = {2: 3, 3: 5, 4: 7, 5: 9, 6: 11, 7: 13, 8: 11, 9: 9, 10: 7, 11: 5, 12: 3}
+    #players_names_list = pregame.get_players_names()
+    #board_dict = pregame.get_board_dict()
+    turn = run_turn()
 main()
