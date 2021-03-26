@@ -1,6 +1,5 @@
 import helper
 import random
-from board import get_board_dict
 
 def roll():
     num_of_dice = 4
@@ -39,31 +38,44 @@ def select_combo(combos):
             return combos[int(i)]
         except:
             i = input(i + ' is not recognised. Please select an acceptable line number. ' + len_str)
-def filter_combo_through_white_pieces(combo,wp_keys):
+
+
+def get_allowed_cols(progress):
+    allowed_cols=[]
+    for col,the_list in progress.items():
+        pos = the_list[0]
+        col_max = the_list[1]
+        if pos<col_max:
+            allowed_cols.append(col)
+    return allowed_cols
+def filter_combo_through_white_list(combo,white_list):
     new_combo = combo
     remove_digits = []
     for digit in combo:
-        if digit not in wp_keys:
+        if digit not in white_list:
             remove_digits.append(digit)
     for digit in remove_digits:
         new_combo.remove(digit)
     return new_combo
-def filter_combos_through_white_pieces(combos,wp_keys):
+def filter_combos_through_white_list(combos,white_list):
     new_combos = []
     for i in range(len(combos)):
         combo = combos[i]
-        new_combo = filter_combo_through_white_pieces(combo,wp_keys)
+        new_combo = filter_combo_through_white_list(combo,white_list)
         if new_combo:
             new_combos.append(new_combo)
     return new_combos
-def run_round(white_pieces={}):
+    
+def run_round(white_pieces={},player_progress_with_max={}):
     wp_keys = white_pieces.keys()
     dice = roll()
     print("You have rolled the following dice: ",end='')
     print(dice)
     combos = get_combos(dice)
     if len(wp_keys)==3:
-        combos = filter_combos_through_white_pieces(combos,wp_keys)
+        combos = filter_combos_through_white_list(combos,wp_keys)
+    combos = filter_combos_through_white_list(combos,get_allowed_cols(player_progress_with_max))
+    
     #find a way to process combos for unplayable integers
     #ways it can be unplayable: no more white pieces,
     #column filled,
