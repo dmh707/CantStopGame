@@ -51,7 +51,7 @@ def add_white_pieces(white_pieces,selection,progress):
         if i in white_pieces:
             white_pieces[i] +=1
         else:
-            prog_for_col = get_progress_for_col(progress,i) + 1
+            prog_for_col = get_progress_for_col(progress,i)
             print(i)
             print(prog_for_col)
             move_piece = 1
@@ -67,4 +67,4 @@ def display_white_pieces(white_pieces):
     #get the max progress in here, once columns are sorted out
     for col in cols:
         progress = white_pieces[col]
-        print("You have achieved place %r in column %r." % (progress,col))
+        print("You have achieved place %r in column %r." % (progress+1,col))
