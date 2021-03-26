@@ -1,30 +1,13 @@
 import helper
 
 
-def get_board_dict():
-    min_col = 2
-    max_col = 12
-    dif_btwn_cols = 2
-    start_val = 3
-    
-    board_dict={}
-    peak = 7
-    for i in range(min_col,max_col+1):
-        if i<=peak:
-            val = dif_btwn_cols*i-1
-        else:
-            b = start_val + (dif_btwn_cols*max_col)
-            val = (-dif_btwn_cols)*i + b
-        board_dict[i] = val
-    return board_dict
+
 
 def get_player_name():
     return input("Player Name: ")
 def display_players_list(names_list):
     print('The players are: ')
-    for i in range(len(names_list)):
-        name = names_list[i]
-        print(str(i) + '. ' + name)
+    print_numbered_list(names_list)
 def add_new_player_bool():
     return helper.yes_no_question("Add new player?")
 def remove_player_bool():
@@ -63,3 +46,6 @@ def get_players_names():
         display_players_list(names_list)
         all_correct_bool = helper.yes_no_question('Is this correct?')
     helper.end_section()
+
+if __name__ == "__main__":
+    get_players_names()
