@@ -1,3 +1,9 @@
+def can_be_int(string):
+    try:
+        int(string)
+        return True
+    except:
+        return False
 def yes_no_question(string):
     answer =  input(string + " (Y or N) ")
     answer.lower()

@@ -71,23 +71,34 @@ def get_progress_str(progress):
 
 def col_to_string(col_max, progress, col):
     empty_space_str = '. '
+    complete_col_str = '- '
     spaces_list = []
     for i in range(col_max):
         spaces_list.append(empty_space_str)
     spaces_list[-1] = col
     for i in progress.keys():
-        char = helper.first_char(progress[i][0])
-        spaces_list[i] = char + ' '
-    output = str(col) + '   '
-    if len(str(col))==1:
-        output += ' '
-    for i in spaces_list:
-        output +=str(i)
+        if i < col_max:
+            char = helper.first_char(progress[i][0])
+            spaces_list[i] = char + ' '
+        else:
+            spaces_list.append('completed')
+    if not helper.can_be_int(spaces_list[-1]):
+        name = progress[col_max][0]
+        output = name + " has completed column " + str(col)
+        progress = False
+    else:
+        output = str(col) + '   '
+        if len(str(col))==1:
+            output += ' '
+        for i in spaces_list:
+            output +=str(i)
+    
     print(output, end='   ')
     
     if progress:
         progress_str = get_progress_str(progress)
         print(progress_str,end='')
+
     print('')
         
     

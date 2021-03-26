@@ -24,7 +24,7 @@ def select_one_new_white_pieces(new_white_pieces):
     while True:
         if int(selection) in new_white_pieces:
             return [selection]
-        selection = int(input(selection + " is not recognised. Please select an acceptable number: "))
+        selection = int(input(str(selection) + " is not recognised. Please select an acceptable number: "))
 
 def handle_new_white_pieces(spots_left,new_white_pieces,white_pieces):
     new_wp_list = list(new_white_pieces.keys())

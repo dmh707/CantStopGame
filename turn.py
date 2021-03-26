@@ -20,7 +20,6 @@ def get_player_progress_with_max(progress):
         if k in progress:
             position = progress[k]
         new_progress[k] = [position,v]
-    print(new_progress)
     return new_progress
 def update_player_progress_with_max(progress,white_pieces):
     for col,pos in white_pieces.items():
