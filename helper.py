@@ -30,3 +30,6 @@ def remove_duplicates_from_list(the_list):
         if i not in new_list:
             new_list.append(i)
     return new_list
+
+def first_char(string):
+    return string[0]
