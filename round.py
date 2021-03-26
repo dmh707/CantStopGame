@@ -63,7 +63,6 @@ def run_round(white_pieces={}):
     combos = get_combos(dice)
     if len(wp_keys)==3:
         combos = filter_combos_through_white_pieces(combos,wp_keys)
-
     #find a way to process combos for unplayable integers
     #ways it can be unplayable: no more white pieces,
     #column filled,
@@ -73,8 +72,5 @@ def run_round(white_pieces={}):
         return False
     return select_combo(combos)
 
-def dummy():
-    print(run_round({7: 3, 8: 1, 6: 3}))
 if __name__ == "__main__":
-    dummy()
-    #print(run_round())
+    print(run_round())

@@ -25,14 +25,19 @@ def add_players_loop(names_list):
         names_list.append(get_player_name())
         add_name_bool = add_new_player_bool()
     return names_list
+def too_few_players_check(names_list):
+    while len(names_list)<2:
+        print("You cannot have fewer than two players. You must add more names before continuing.")
+        add_players_loop(names_list)
+    return names_list
 
 def remove_players_loop(names_list):
     remove_name_bool = True
     while remove_name_bool:
         names_list=remove_player(names_list)
+        names_list = too_few_players_check(names_list)
         remove_name_bool = remove_player_bool()
     return names_list
-
 def get_names_list():
     names_str = input("Please list the names of the players, separated by commas: ")
     names_list = names_str.split(",")
@@ -40,6 +45,7 @@ def get_names_list():
         name = names_list[i]
         if name[0]==' ':
             names_list[i]=name[1:]
+    names_list = too_few_players_check(names_list)
     return names_list
 
 def get_players_names():
@@ -55,6 +61,7 @@ def get_players_names():
         display_players_list(names_list)
         all_correct_bool = helper.yes_no_question('Is this correct?')
     helper.end_section()
+    return names_list
 
 if __name__ == "__main__":
     get_players_names()

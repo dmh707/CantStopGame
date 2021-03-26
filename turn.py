@@ -3,10 +3,11 @@ from round import *
 
 def add_new_white_pieces_loop(new_white_pieces, white_pieces):
     for i in new_white_pieces:
+        #this if statement handles if there is double of an integer
         if i not in white_pieces:
             white_pieces[i] = 1
         else:
-            iterate_white_piece(i,white_pieces)
+            white_pieces = iterate_white_piece(i,white_pieces)
     return white_pieces
 def iterate_white_piece(num,white_pieces):
     assert num in white_pieces
@@ -50,6 +51,7 @@ def display_white_pieces(white_pieces):
     print("The progress of your white pieces are as follows:")
     cols = list(white_pieces.keys())
     cols.sort()
+    #get the max progress in here, once columns are sorted out
     for col in cols:
         progress = white_pieces[col]
         print("You have achieved place %r in column %r." % (progress,col))
