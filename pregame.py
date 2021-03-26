@@ -7,16 +7,16 @@ def get_player_name():
     return input("Player Name: ")
 def display_players_list(names_list):
     print('The players are: ')
-    print_numbered_list(names_list)
+    helper.print_numbered_list(names_list)
 def add_new_player_bool():
     return helper.yes_no_question("Add new player?")
 def remove_player_bool():
     return helper.yes_no_question("Remove a player?")
 def remove_player(names_list):
-    display_players_list(names_list)
     num = int(input("Select the number of the player to remove: "))
     if num < len(names_list):
-        names_list.pop(0)
+        names_list.pop(num)
+    display_players_list(names_list)
     return names_list
 
 def add_players_loop(names_list):
@@ -32,17 +32,26 @@ def remove_players_loop(names_list):
         names_list=remove_player(names_list)
         remove_name_bool = remove_player_bool()
     return names_list
+
+def get_names_list():
+    names_str = input("Please list the names of the players, separated by commas: ")
+    names_list = names_str.split(",")
+    for i in range(len(names_list)):
+        name = names_list[i]
+        if name[0]==' ':
+            names_list[i]=name[1:]
+    return names_list
+
 def get_players_names():
-    names_list = []
-    names_list = add_players_loop(names_list)
+    names_list = get_names_list()
     
     display_players_list(names_list)
     all_correct_bool = helper.yes_no_question('Is this correct?')
     while not all_correct_bool:
+        if remove_player_bool():
+            names_list = remove_players_loop(names_list)
         if add_new_player_bool():
             names_list = add_players_loop(names_list)
-        if remove_player_bool():
-            remove_player(names_list)
         display_players_list(names_list)
         all_correct_bool = helper.yes_no_question('Is this correct?')
     helper.end_section()
