@@ -13,9 +13,9 @@ def add_new_white_pieces_loop(new_white_pieces, white_pieces):
         else:
             white_pieces = iterate_white_piece(i,white_pieces)
     return white_pieces
-def iterate_white_piece(num,white_pieces):
+def iterate_white_piece(col,white_pieces):
     assert num in white_pieces
-    white_pieces[num] +=1
+    white_pieces[col] +=1
     return white_pieces
 def select_one_new_white_pieces(new_white_pieces):
     print("You only have 1 white piece left. Which sum would you like to use?")

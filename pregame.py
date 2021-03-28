@@ -13,6 +13,7 @@ def add_new_player_bool():
 def remove_player_bool():
     return helper.yes_no_question("Remove a player?")
 def remove_player(names_list):
+    display_players_list(names_list)
     num = int(input("Select the number of the player to remove: "))
     if num < len(names_list):
         names_list.pop(num)
@@ -22,6 +23,7 @@ def remove_player(names_list):
 def add_players_loop(names_list):
     add_name_bool = True
     while add_name_bool:
+        display_players_list(names_list)
         names_list.append(get_player_name())
         add_name_bool = add_new_player_bool()
     return names_list
